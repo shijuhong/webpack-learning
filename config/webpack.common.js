@@ -3,7 +3,10 @@ const { srcPath, publicPath } = require("./path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: path.resolve(srcPath, "index.js"),
+  entry: {
+    index: path.resolve(srcPath, "index.js"),
+    second: path.resolve(srcPath, "second.js"),
+  },
   module: {
     rules: [
       {
@@ -22,6 +25,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(publicPath, "index.html"),
       filename: "index.html",
+      chunks: ["index"],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(publicPath, "second.html"),
+      filename: "second.html",
+      chunks: ["second"],
     }),
   ],
 };

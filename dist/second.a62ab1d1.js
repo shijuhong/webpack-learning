@@ -1,0 +1,1 @@
+!function(){"use strict";document.getElementById("hello").addEventListener("click",(function(){alert("hello")}))}();

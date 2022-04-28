@@ -12,7 +12,8 @@ module.exports = merge(webpackCommon, {
   mode: "production",
   output: {
     path: distPath,
-    filename: "bundle.[contenthash:8].js",
+    // 多文件产出时，名称需要设置变量，变量值为入口的 key 值
+    filename: "[name].[contenthash:8].js",
     environment: {
       arrowFunction: false,
     },
