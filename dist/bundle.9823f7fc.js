@@ -1,0 +1,1 @@
+!function(){"use strict";console.log(function(){return Array.prototype.slice.call(arguments).reduce((function(n,r){return n+r}),0)}(3,4,5,6))}();
