@@ -1,6 +1,7 @@
 const path = require("path");
 const { srcPath, publicPath } = require("./path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const WebpackBarPlugin = require("webpackbar");
 
 module.exports = {
   entry: {
@@ -22,6 +23,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new WebpackBarPlugin({
+      color: "#e58691",
+    }),
     new HtmlWebpackPlugin({
       template: path.resolve(publicPath, "index.html"),
       filename: "index.html",
