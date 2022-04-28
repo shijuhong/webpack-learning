@@ -5,6 +5,8 @@ const webpackCommon = require("./webpack.common");
 const { distPath, srcPath } = require("./path");
 const MiniCssExtractionPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = merge(webpackCommon, {
   mode: "production",
@@ -66,4 +68,9 @@ module.exports = merge(webpackCommon, {
       filename: "css/main.[contenthash:8].css",
     }),
   ],
+  optimization: {
+    minimize: true,
+    // 压缩 js 和 css 代码
+    minimizer: [new TerserPlugin(), new OptimizeCssAssetsPlugin()],
+  },
 });
