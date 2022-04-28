@@ -1,7 +1,9 @@
 import "./index.scss";
+import moment from "moment";
 
 const hello = document.getElementById("hello");
+const time = document.getElementById("time");
 
 hello.addEventListener("click", () => {
-  alert("hello");
+  time.innerHTML = moment().format("MMMM Do YYYY, h:mm:ss a");
 });

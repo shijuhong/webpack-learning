@@ -6,7 +6,7 @@ const { distPath, srcPath } = require("./path");
 const MiniCssExtractionPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CssMinimizerPlugin  = require("css-minimizer-webpack-plugin");
 
 module.exports = merge(webpackCommon, {
   mode: "production",
@@ -72,6 +72,28 @@ module.exports = merge(webpackCommon, {
   optimization: {
     minimize: true,
     // 压缩 js 和 css 代码
-    minimizer: [new TerserPlugin(), new OptimizeCssAssetsPlugin()],
+    minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
+    // 分割代码块
+    splitChunks: {
+      chunks: "all",
+      // 缓存分组
+      cacheGroups: {
+        // 第三方模块
+        vendor: {
+          name: "vendor",
+          priority: 1, // 值越高，优先级越高
+          test: /node_modules/,
+          minSize: 0, // 文件太小就不抽离
+          minChunks: 1, // 复用一次就抽离
+        },
+        // 自己写的公共模块抽离
+        common: {
+          name: "common",
+          priority: 0,
+          minSize: 0,
+          minChunks: 2, // 复用两次就抽离
+        }
+      }
+    }
   },
 });

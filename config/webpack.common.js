@@ -25,12 +25,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(publicPath, "index.html"),
       filename: "index.html",
-      chunks: ["index"],
+      // 要引用的 js 代码
+      chunks: ["index", "vendor", "common"],
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(publicPath, "second.html"),
       filename: "second.html",
-      chunks: ["second"],
+      chunks: ["second", "vendor"],
     }),
   ],
 };
