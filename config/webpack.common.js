@@ -14,11 +14,12 @@ module.exports = {
         test: /\.m?js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: "babel-loader?cacheDirectory",
           options: {
             presets: ["@babel/preset-env"],
           },
         },
+        include: srcPath,
       },
     ],
   },

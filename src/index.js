@@ -1,9 +1,12 @@
 import sum from "./math/sum";
-import "./js/other"
+import "./js/other";
 import "./index.css";
 import "./index.scss";
 import "./index.less";
 import moment from "moment";
+import "moment/locale/zh-cn";
+
+moment.locale("zh-cn");
 
 let a = 3;
 let b = 4;

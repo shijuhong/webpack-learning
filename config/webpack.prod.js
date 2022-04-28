@@ -6,7 +6,8 @@ const { distPath, srcPath } = require("./path");
 const MiniCssExtractionPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const CssMinimizerPlugin  = require("css-minimizer-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const { IgnorePlugin } = require("webpack");
 
 module.exports = merge(webpackCommon, {
   mode: "production",
@@ -68,6 +69,11 @@ module.exports = merge(webpackCommon, {
     new MiniCssExtractionPlugin({
       filename: "css/main.[contenthash:8].css",
     }),
+    // 避免引入 moment 所有内容
+    new IgnorePlugin({
+      resourceRegExp: /^\.\/locale$/,
+      contextRegExp: /moment$/,
+    }),
   ],
   optimization: {
     minimize: true,
@@ -92,8 +98,8 @@ module.exports = merge(webpackCommon, {
           priority: 0,
           minSize: 0,
           minChunks: 2, // 复用两次就抽离
-        }
-      }
-    }
+        },
+      },
+    },
   },
 });
